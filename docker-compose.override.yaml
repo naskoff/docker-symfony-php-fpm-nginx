@@ -1,0 +1,18 @@
+services:
+  rabbitmq:
+    image: rabbitmq:4.0.4-management-alpine
+    ports:
+      - "15672:15672"
+  php-cli:
+    build:
+      target: dev
+    ports:
+      - "9001:9001"
+    volumes:
+      - .:/app
+      - ./supervisor-web-ui.conf:/etc/supervisor/conf.d/supervisor-web-ui.conf
+  php-fpm:
+    build:
+      target: dev
+    volumes:
+      - .:/app
